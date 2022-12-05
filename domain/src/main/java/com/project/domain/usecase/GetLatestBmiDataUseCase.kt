@@ -11,13 +11,13 @@ class GetLatestBmiDataUseCase(private val bmiRepository: BmiRepository) {
 
     operator fun invoke(
         scope: CoroutineScope,
-        onResult: (BmiModel) -> Unit = {}
+        callback: (BmiModel) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val getLatestBmiDataJob = scope.async(Dispatchers.IO) {
                 bmiRepository.getLatestBmiData()
             }
-            onResult(getLatestBmiDataJob.await())
+            callback(getLatestBmiDataJob.await())
         }
     }
 }

@@ -11,13 +11,13 @@ class GetBmiDataUseCase(private val bmiRepository: BmiRepository) {
 
     operator fun invoke(
         scope: CoroutineScope,
-        onResult: (List<BmiModel>) -> Unit = {}
+        callback: (List<BmiModel>) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val getBmiDataJob = scope.async(Dispatchers.IO) {
                 bmiRepository.getBmiData()
             }
-            onResult(getBmiDataJob.await())
+            callback(getBmiDataJob.await())
         }
     }
 }
