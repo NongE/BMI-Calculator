@@ -1,6 +1,7 @@
 package com.project.data.source
 
 import android.content.Context
+import com.project.data.room.BmiDao
 import com.project.data.room.BmiDatabase
 import com.project.data.room.BmiEntity
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -13,10 +14,8 @@ interface BmiDataSource {
 }
 
 class BmiDataSourceImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+    private val bmiDao: BmiDao
 ) : BmiDataSource {
-
-    private val bmiDao = BmiDatabase.getDatabase(context).bmiDao()
 
     override suspend fun getBmi(): List<BmiEntity> = bmiDao.getBmiData()
 

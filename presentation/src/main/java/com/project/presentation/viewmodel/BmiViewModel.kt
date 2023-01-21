@@ -16,6 +16,6 @@ class BmiViewModel @Inject constructor(
 ) : ViewModel() {
     private val _bmiLatestData = MutableLiveData<BmiModel>()
 
-    val bmiLatestData: LiveData<BmiModel> = _bmiLatestData
+    val bmiLatestData: MutableLiveData<BmiModel> = _bmiLatestData
 
 }
